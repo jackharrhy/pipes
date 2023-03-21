@@ -1,4 +1,4 @@
-package cli
+package game
 
 type piecestate struct {
 	off   rune

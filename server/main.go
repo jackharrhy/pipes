@@ -16,7 +16,7 @@ import (
 	bm "github.com/charmbracelet/wish/bubbletea"
 	lm "github.com/charmbracelet/wish/logging"
 
-	cli "github.com/jackharrhy/pipes/cli"
+	game "github.com/jackharrhy/pipes/game"
 )
 
 const (
@@ -61,5 +61,5 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 		wish.Fatalln(s, "no active terminal, skipping")
 		return nil, nil
 	}
-	return cli.Setup(pty.Window.Width, pty.Window.Height)
+	return game.Setup(pty.Window.Width, pty.Window.Height)
 }
