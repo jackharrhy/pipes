@@ -7,3 +7,6 @@ var ZeroHelloWorld string
 
 //go:embed test-a.pipes
 var TestA string
+
+//go:embed test-b.pipes
+var TestB string

@@ -33,23 +33,23 @@ func (p piece) display() string {
 
 var (
 	fourPieceStates = []piecestate{
-		piecestate{off: '╬', on: '╋'},
+		piecestate{off: '╬', on: '╋', up: true, right: true, down: true, left: true},
 	}
 	threePieceStates = []piecestate{
-		piecestate{off: '╣', on: '┫'},
-		piecestate{off: '╩', on: '┻'},
-		piecestate{off: '╠', on: '┣'},
-		piecestate{off: '╦', on: '┳'},
+		piecestate{off: '╣', on: '┫', up: true, right: false, down: true, left: true},
+		piecestate{off: '╩', on: '┻', up: true, right: true, down: false, left: true},
+		piecestate{off: '╠', on: '┣', up: true, right: true, down: true, left: false},
+		piecestate{off: '╦', on: '┳', up: false, right: true, down: true, left: true},
 	}
 	flatTwoPieceStates = []piecestate{
-		piecestate{off: '═', on: '━'},
-		piecestate{off: '║', on: '┃'},
+		piecestate{off: '═', on: '━', up: false, right: true, down: false, left: true},
+		piecestate{off: '║', on: '┃', up: true, right: false, down: true, left: false},
 	}
 	curveTwoPieceStates = []piecestate{
-		piecestate{off: '╝', on: '┛'},
-		piecestate{off: '╚', on: '┗'},
-		piecestate{off: '╔', on: '┏'},
-		piecestate{off: '╗', on: '┓'},
+		piecestate{off: '╝', on: '┛', up: true, right: false, down: false, left: true},
+		piecestate{off: '╚', on: '┗', up: true, right: true, down: false, left: false},
+		piecestate{off: '╔', on: '┏', up: false, right: true, down: true, left: false},
+		piecestate{off: '╗', on: '┓', up: false, right: false, down: true, left: true},
 	}
 )
 

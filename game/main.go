@@ -25,7 +25,8 @@ func Setup(width int, height int) (tea.Model, []tea.ProgramOption) {
 		minHeight: 16,
 		board:     cellbuffer{},
 	}
-	m.board.init(puzzles.TestA)
+	m.board.init(puzzles.TestB)
+	recalculatePipes(&m.board)
 	return m, []tea.ProgramOption{tea.WithAltScreen(), tea.WithMouseAllMotion()}
 }
 
@@ -57,6 +58,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				p := v.(piece)
 				p.state = ri.nextPiecestate
 				m.board.set(p, msg.X, msg.Y)
+				recalculatePipes(&m.board)
 			}
 		}
 	}

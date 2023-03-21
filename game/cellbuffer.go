@@ -4,6 +4,11 @@ import (
 	"strings"
 )
 
+type cellpos struct {
+	x int
+	y int
+}
+
 type cell interface {
 	rune() rune
 	display() string
@@ -39,9 +44,9 @@ func (c *cellbuffer) init(s string) {
 			piece.state = p.piecestate
 			c.cells[i] = piece
 		} else if char == producerRune {
-			c.cells[i] = conduit{Producer}
+			c.cells[i] = conduit{role: Producer, on: true}
 		} else if char == consumerRune {
-			c.cells[i] = conduit{Consumer}
+			c.cells[i] = conduit{role: Consumer, on: false}
 		} else {
 			c.cells[i] = displaycell{char}
 		}
