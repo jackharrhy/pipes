@@ -4,38 +4,8 @@ import (
 	"fmt"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/lipgloss"
 	"github.com/jackharrhy/pipes/puzzles"
 )
-
-var (
-	fourPiece     = []rune{'╬'}
-	threePiece    = []rune{'╩', '╠', '╦', '╣'}
-	flatTwoPiece  = []rune{'║', '═'}
-	curveTwoPiece = []rune{'╚', '╔', '╗', '╝'}
-)
-
-var pieceTransition = map[rune]rune{
-	fourPiece[0]: fourPiece[0],
-
-	threePiece[0]: threePiece[1],
-	threePiece[1]: threePiece[2],
-	threePiece[2]: threePiece[3],
-	threePiece[3]: threePiece[0],
-
-	flatTwoPiece[0]: flatTwoPiece[1],
-	flatTwoPiece[1]: flatTwoPiece[0],
-
-	curveTwoPiece[0]: curveTwoPiece[1],
-	curveTwoPiece[1]: curveTwoPiece[2],
-	curveTwoPiece[2]: curveTwoPiece[3],
-	curveTwoPiece[3]: curveTwoPiece[0],
-}
-
-var style = lipgloss.NewStyle().
-	Bold(true).
-	Foreground(lipgloss.Color("#52bf90")).
-	Background(lipgloss.Color("black"))
 
 type model struct {
 	init       bool
@@ -82,9 +52,11 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		if msg.Type == tea.MouseLeft {
 			v := m.board.get(msg.X, msg.Y)
-			next, ok := pieceTransition[v]
+			ri, ok := runeToRuneinfo[v.rune()]
 			if ok {
-				m.board.set(next, msg.X, msg.Y)
+				p := v.(piece)
+				p.state = ri.nextPiecestate
+				m.board.set(p, msg.X, msg.Y)
 			}
 		}
 	}
@@ -101,7 +73,7 @@ func (m model) View() string {
 		return s
 	}
 
-	s += style.Render(m.board.String())
+	s += m.board.Display()
 
 	return s
 }
