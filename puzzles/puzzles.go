@@ -12,6 +12,12 @@ var ZeroHelloWorld string
 //go:embed 1-corner.pipes
 var OneCorner string
 
+//go:embed 2-sine-wave.pipes
+var TwoSineWave string
+
+//go:embed 3-multi-sink.pipes
+var ThreeMultiSink string
+
 type Level struct {
 	title string
 	desc  string
@@ -33,5 +39,15 @@ var Levels = []list.Item{
 		title: "corner",
 		desc:  "another dimension",
 		board: &OneCorner,
+	},
+	Level{
+		title: "sine wave",
+		desc:  "y = sin(x)",
+		board: &TwoSineWave,
+	},
+	Level{
+		title: "multi sink",
+		desc:  "oh my",
+		board: &ThreeMultiSink,
 	},
 }

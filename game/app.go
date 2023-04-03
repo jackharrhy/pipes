@@ -102,7 +102,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case tea.KeyMsg:
 		switch msg.String() {
-		case "q", "ctrl+c", "esc":
+		case "ctrl+c":
 			return m, tea.Quit
 		}
 
@@ -125,6 +125,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		case tea.KeyMsg:
 			switch msg.String() {
+
+			case "q", "esc":
+				return m, tea.Quit
+
 			case "enter":
 				level, ok := m.levelsList.SelectedItem().(puzzles.Level)
 
@@ -142,6 +146,14 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case GameScreen:
 		switch msg := msg.(type) {
+
+		case tea.KeyMsg:
+			switch msg.String() {
+
+			case "q", "esc", "backspace":
+				cmd = delayedChangeScreen(0, LevelSelectScreen)
+
+			}
 
 		case changeScreen:
 			if m.nextLevel == nil {
