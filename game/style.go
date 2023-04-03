@@ -15,4 +15,8 @@ var (
 			Bold(true).
 			Foreground(lipgloss.Color("#607A9D")).
 			Background(lipgloss.Color("#252627"))
+	completeStyle = lipgloss.NewStyle().
+			Width(32).
+			Align(lipgloss.Center).
+			Foreground(lipgloss.Color("#e990c5"))
 )

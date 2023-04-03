@@ -180,3 +180,20 @@ func recalculatePipes(cb *cellbuffer) {
 		}
 	}
 }
+
+func consumersAllHappy(cb *cellbuffer) bool {
+	var allHappy = true
+
+	conduitPositions := findConduitPositions(cb)
+
+	for _, pos := range conduitPositions {
+		p, ok := cb.get(pos.x, pos.y).(conduit)
+		if ok && p.role == Consumer {
+			if !p.on {
+				allHappy = false
+			}
+		}
+	}
+
+	return allHappy
+}
