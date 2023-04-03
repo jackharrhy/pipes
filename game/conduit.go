@@ -96,20 +96,21 @@ func neighboringPieces(cb *cellbuffer, cp cellpos) (*piece, *piece, *piece, *pie
 func possiblePaths(cb *cellbuffer, cp cellpos) []cellpos {
 	var paths []cellpos
 	var top, right, down, left = neighboringPieces(cb, cp)
+	self, isPiece := cb.get(cp.x, cp.y).(piece)
 
-	if top != nil && top.state.down && !top.on {
+	if top != nil && (!isPiece || self.state.up) && top.state.down && !top.on {
 		paths = append(paths, cellpos{cp.x, cp.y - 1})
 	}
 
-	if right != nil && right.state.left && !right.on {
+	if right != nil && (!isPiece || self.state.right) && right.state.left && !right.on {
 		paths = append(paths, cellpos{cp.x + 1, cp.y})
 	}
 
-	if down != nil && down.state.up && !down.on {
+	if down != nil && (!isPiece || self.state.down) && down.state.up && !down.on {
 		paths = append(paths, cellpos{cp.x, cp.y + 1})
 	}
 
-	if left != nil && left.state.right && !left.on {
+	if left != nil && (isPiece || self.state.left) && left.state.right && !left.on {
 		paths = append(paths, cellpos{cp.x - 1, cp.y})
 	}
 
